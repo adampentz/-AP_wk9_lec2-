@@ -3,6 +3,25 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) {
+		//recurse through file system
+		System.out.println("\n\n\nRecursion Get:\n");
+		Recursion.q.clear();
+		Recursion.recursionGet(Recursion.root);
+		
+		while(!Recursion.q.isEmpty()) {
+			System.out.println(Recursion.q.remove());
+		}
+		
+		
+		//iterate through file system
+		System.out.println("\n\n\nIterative Get:\n");
+		Recursion.iterativeGet(Recursion.root);
+		
+		while(!Recursion.q.isEmpty()) {
+			System.out.println(Recursion.q.remove());
+		}
+		
+		
 		//Create tree nodes
 		Node a = new Node("A");
 		Node b = new Node("B");
