@@ -51,7 +51,13 @@ public class Main {
 		bt.insert(49);
 		bt.insert(31);
 		
-		bt.levelOrder();
+		System.out.println(bt.search(31).getKey());
+		
+		bt.preOrder();
+		System.out.println();
+		bt.delete(19);
+		
+		bt.preOrder();
 	}
 
 }

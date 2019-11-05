@@ -18,6 +18,10 @@ public class BSTNode {
 		return key;
 	}
 	
+	public void setKey(int k) {
+		key = k;
+	}
+	
 	public Person getData() {
 		return data;
 	}
