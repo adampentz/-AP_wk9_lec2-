@@ -6,15 +6,22 @@ public class BinaryTree {
 	private BSTNode root;
 	
 	//constructor
-	BinaryTree(BSTNode rt){
-		root = rt;
+	BinaryTree(){
 	}
 	
 	//private member functions
+	/**
+	 * print node key and person name to console
+	 * @param rt node containing data
+	 */
 	private void printData(BSTNode rt) {
 		System.out.print("(" + rt.getKey() + ")" + rt.getData().getName() + " ");
 	}
 	
+	/**
+	 * recursively print nodes to console in pre-order traversal
+	 * @param rt
+	 */
 	private void printPreOrder(BSTNode rt) {
 		
 		//base case: if node is null, return
@@ -28,6 +35,10 @@ public class BinaryTree {
 		printPreOrder(rt.right);
 	}
 	
+	/**
+	 * recursively print nodes to console in in-order traversal
+	 * @param rt
+	 */
 	private void printInOrder(BSTNode rt) {
 		
 		//base case: if node is null, return
@@ -41,6 +52,10 @@ public class BinaryTree {
 		printInOrder(rt.right);
 	}
 	
+	/**
+	 * recursively print nodes to console in post-order traversal
+	 * @param rt
+	 */
 	private void printPostOrder(BSTNode rt) {
 		
 		//base case: if node is null, return
@@ -54,6 +69,11 @@ public class BinaryTree {
 		printData(rt);
 	}
 	
+	/**
+	 * get the number of nodes in the tree
+	 * @param rt
+	 * @return integer number of nodes in tree
+	 */
 	private int getSize(BSTNode rt) {
 		int size = 0;
 		
@@ -68,6 +88,11 @@ public class BinaryTree {
 		return size;
 	}
 	
+	/**
+	 * get the height of the tree
+	 * @param rt
+	 * @return integer height of tree
+	 */
 	private int getHeight(BSTNode rt) {
 		//base case: root is null
 		if(rt == null)
@@ -85,20 +110,12 @@ public class BinaryTree {
 		}
 	}
 	
-	private void printLevel(BSTNode rt, int level) {
-		//base case
-		if(rt == null)
-			return;
-		
-		//Start at level 1 and continue on each branch
-		if(level == 1)
-			printData(rt);
-		else if(level > 1){
-			printLevel(rt.left, level - 1);
-			printLevel(rt.right, level - 1);
-		}
-	}
-	
+	/**
+	 * insert a node into the tree
+	 * @param rt
+	 * @param key
+	 * @return
+	 */
 	private BSTNode insert(BSTNode rt, int key) {
 		//base case: if null, create new node
 		if(rt == null)
@@ -114,6 +131,12 @@ public class BinaryTree {
 		return rt;
 	}
 	
+	/**
+	 * delete a node from the tree
+	 * @param rt
+	 * @param key
+	 * @return
+	 */
     private BSTNode deleteNode(BSTNode rt, int key) {
     	//Base case: root is null, return root
         if(rt == null) 
@@ -156,6 +179,11 @@ public class BinaryTree {
         return rt;
     }
     
+    /**
+     * find the node with minimum key value
+     * @param rt
+     * @return
+     */
     private BSTNode minNode(BSTNode rt) {
         //base case: node is null
     	if(rt == null)
@@ -169,64 +197,96 @@ public class BinaryTree {
         return rt;
     }
 	
+    /**
+     * find a node in the tree with a given key value
+     * @param rt
+     * @param key
+     * @return
+     */
     private BSTNode findNode(BSTNode rt, int key) {
-    	// Base Cases: root is null or key is present at root 
-        if (rt==null || rt.getKey()==key) 
+		//base case: rt is the node to be found
+    	if (rt.getKey() == key) 
             return root; 
       
-        // val is greater than root's key 
-        if (rt.getKey() > key) 
+        // key is less than root's key; go to left
+        if (key < rt.getKey() && rt.left != null) 
             return findNode(rt.left, key); 
-      
-        // val is less than root's key 
-        return findNode(rt.right, key); 
+        else if(key > rt.getKey() && rt.right != null)
+        // key is greater than root's key; go to right
+        	return findNode(rt.right, key); 
+        else
+        // return null since node cannot be found
+        	return null;
     }
     
 	//public member functions
+    /**
+     * insert a node with a given key
+     * @param key
+     */
 	public void insert(int key) {
 		root = insert(root, key);
 	}
 	
+	/**
+	 * find and delete a node that matches a given key
+	 * @param key
+	 */
 	public void delete(int key) {
 		 
         deleteNode(root, key);
     }
 	
+	/**
+	 * check if tree is empty
+	 * @return
+	 */
 	public boolean isEmpty() {
 		return (root == null);
 	}
 	
+	/**
+	 * get the number of nodes in the tree
+	 * @return
+	 */
 	public int size() {
 		return getSize(root);
 	}
 	
+	/**
+	 * print the tree in pre-order traversal
+	 */
 	public void preOrder() {
 		printPreOrder(root);
 	}
 	
+	/**
+	 * print the tree in in-order traversal
+	 */
 	public void inOrder() {
 		printInOrder(root);
 	}
 	
+	/**
+	 * print the tree in post-order traversal
+	 */
 	public void postOrder() {
 		printPostOrder(root);
 	}
 	
-	public BSTNode search(int key) {
-		return findNode(root,key);
-	}
-	
-	public void levelOrder() {
+	/**
+	 * find a node with a given key and return its data
+	 * @param key
+	 * @return a person from the tree
+	 */
+	public Person search(int key) {
 		
-		//get the height of the tree
-		int height = getHeight(root);
+		BSTNode rt = findNode(root,key);
 		
-		//print each height
-		for(int i = 1; i <= height; i++)
-			printLevel(root, i);
+		if( rt != null)
+			return rt.getData();
+		else
+			return null;
 	}
-	
-	
-	
-	
+
 }

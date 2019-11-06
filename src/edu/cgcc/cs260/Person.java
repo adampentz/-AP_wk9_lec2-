@@ -29,6 +29,19 @@ public class Person {
 		return student;
 	}
 	
+	public String isStudentYesNo() {
+		if(student)
+			return "Yes";
+		else
+			return "No";
+	}
+	
+	public void printPerson() {
+		System.out.println("Name: " + name);
+		System.out.println("Age: " + age);
+		System.out.println("Student: " + isStudentYesNo());
+	}
+	
 	public static Person generatePerson() {
 		String firstName = randomFirstNames[new Random().nextInt(randomFirstNames.length)];
 		String lastName = randomLastNames[new Random().nextInt(randomLastNames.length)];

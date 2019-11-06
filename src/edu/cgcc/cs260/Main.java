@@ -39,7 +39,7 @@ public class Main {
 		 * bt.postOrder();
 		 */
 		int[] iArray = new int[] {8,10,14,3,6,7,1,4,13};
-		BinaryTree bt = new BinaryTree(null);
+		BinaryTree bt = new BinaryTree();
 //		bt.insert(11);
 //		bt.insert(6);
 //		bt.insert(8);
@@ -67,6 +67,14 @@ public class Main {
 		bt.delete(14);
 		System.out.println();
 		bt.inOrder();
+		
+		System.out.println();
+		System.out.println();
+		
+		Person p = bt.search(8);
+		if(p != null) {
+			p.printPerson();
+		}
 	}
 
 }
