@@ -38,26 +38,35 @@ public class Main {
 		 * System.out.println(); System.out.print("Post Order Traverse: ");
 		 * bt.postOrder();
 		 */
+		int[] iArray = new int[] {8,10,14,3,6,7,1,4,13};
 		BinaryTree bt = new BinaryTree(null);
-		bt.insert(11);
-		bt.insert(6);
-		bt.insert(8);
-		bt.insert(19);
-		bt.insert(4);
-		bt.insert(10);
-		bt.insert(5);
-		bt.insert(17);
-		bt.insert(43);
-		bt.insert(49);
-		bt.insert(31);
+//		bt.insert(11);
+//		bt.insert(6);
+//		bt.insert(8);
+//		bt.insert(19);
+//		bt.insert(4);
+//		bt.insert(10);
+//		bt.insert(5);
+//		bt.insert(17);
+//		bt.insert(43);
+//		bt.insert(49);
+//		bt.insert(31);
+		for(int i : iArray) {
+			bt.insert(i);
+		}
 		
-		System.out.println(bt.search(31).getKey());
 		
-		bt.preOrder();
+		//System.out.println(bt.search(31).getKey());
+		
+		bt.inOrder();
 		System.out.println();
-		bt.delete(19);
-		
-		bt.preOrder();
+		bt.delete(13);
+		System.out.println();
+		bt.inOrder();
+		System.out.println();
+		bt.delete(14);
+		System.out.println();
+		bt.inOrder();
 	}
 
 }

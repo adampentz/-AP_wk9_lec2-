@@ -25,4 +25,8 @@ public class BSTNode {
 	public Person getData() {
 		return data;
 	}
+	
+	public void setData(Person d) {
+		data = d;
+	}
 }

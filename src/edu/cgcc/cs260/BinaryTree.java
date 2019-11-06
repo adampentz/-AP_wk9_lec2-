@@ -85,76 +85,88 @@ public class BinaryTree {
 		}
 	}
 	
-//	private void printLevel(BSTNode rt, int level) {
-//		//base case
-//		if(rt == null)
-//			return;
-//		
-//		//Start at level 1 and continue on each branch
-//		if(level == 1)
-//			printData(rt);
-//		else if(level > 1) {
-//			printLevel(rt.left, level - 1);
-//			printLevel(rt.right, level - 1);
-//		}
-//	}
+	private void printLevel(BSTNode rt, int level) {
+		//base case
+		if(rt == null)
+			return;
+		
+		//Start at level 1 and continue on each branch
+		if(level == 1)
+			printData(rt);
+		else if(level > 1){
+			printLevel(rt.left, level - 1);
+			printLevel(rt.right, level - 1);
+		}
+	}
 	
-	private BSTNode insert(BSTNode node, int key) {
+	private BSTNode insert(BSTNode rt, int key) {
 		//base case: if null, create new node
-		if(node == null)
-			node = new BSTNode(key);
+		if(rt == null)
+			rt = new BSTNode(key);
 		//otherwise: compare keys and insert into correct location
 		else {
-			if(key <= node.getKey())
-				node.left = insert(node.left, key);
+			if(key <= rt.getKey())
+				rt.left = insert(rt.left, key);
 			else
-				node.right = insert(node.right, key);
+				rt.right = insert(rt.right, key);
 		}
 		
-		return node;
+		return rt;
 	}
 	
     private BSTNode deleteNode(BSTNode rt, int key) {
     	//Base case: root is null, return root
         if(rt == null) 
-        	return rt;
- 
-        if(key < rt.getKey()) {
-            rt.left = deleteNode(rt.left, key);
-        } else if(key > rt.getKey()) {
-            rt.right = deleteNode(rt.right, key);
-        } else {
-            // node with no leaf nodes
-            if(rt.left == null && rt.right == null) {
-                System.out.println("deleting "+key);
-                return null;
-            } else if(rt.left == null) {
-                // node with one node (no left node)
-                System.out.println("deleting "+key);
-                return rt.right;
-            } else if(rt.right == null) {
-                // node with one node (no right node)
-                System.out.println("deleting "+key);
-                return rt.left;
-            } else {
-                // nodes with two nodes
-                // search for min number in right sub tree
-                int minValue = minValue(rt);
-                rt.setKey(minValue);
-                rt.right = deleteNode(rt.right, minValue);
-                System.out.println("deleting "+key);
-            }
+        	return null;
+        
+        //the node to delete is in the left sub tree
+        if(key < rt.getKey())
+        	rt.left = deleteNode(rt.left, key);
+        
+        //the node to delete is in the right sub tree
+        else if(key > rt.getKey())
+        	rt.right = deleteNode(rt.right, key);
+        else {
+        	//case 1: no children
+        	if(rt.left == null && rt.right == null) {
+        		rt = null;
+        	}
+        	//case 2: right child
+        	else if(rt.left == null) {
+        		rt = rt.right;
+        	}
+        	//case 3: left child
+        	else if(rt.right == null) {
+        		rt = rt.left;
+        	}
+        	//case 4: two children
+        	else {
+        		//store node with smallest key in right subtree
+        		BSTNode temp = minNode(rt.right);
+        		
+        		//duplicate the node to new location
+        		rt.setKey(temp.getKey());
+        		rt.setData(temp.getData());
+        		rt.right = deleteNode(rt.right, temp.getKey());
+        	}
+        	
         }
- 
+        
+        //update parent node reference
         return rt;
     }
     
-    private int minValue(BSTNode rt) {
-    	 
-        if(rt.left != null) {
-            return minValue(rt.left);
-        }
-        return rt.getKey();
+    private BSTNode minNode(BSTNode rt) {
+        //base case: node is null
+    	if(rt == null)
+            return null;
+    	
+    	//case 1: a smaller key exists to the left
+        if(rt.left != null)
+        	return minNode(rt.left);
+        
+        //return node with smallest key
+        return rt;
     }
 	
     private BSTNode findNode(BSTNode rt, int key) {
@@ -204,15 +216,15 @@ public class BinaryTree {
 		return findNode(root,key);
 	}
 	
-//	public void levelOrder() {
-//		
-//		//get the height of the tree
-//		int height = getHeight(root);
-//		
-//		//print each height
-//		for(int i = 1; i <= height; i++)
-//			printLevel(root, i);
-//	}
+	public void levelOrder() {
+		
+		//get the height of the tree
+		int height = getHeight(root);
+		
+		//print each height
+		for(int i = 1; i <= height; i++)
+			printLevel(root, i);
+	}
 	
 	
 	
