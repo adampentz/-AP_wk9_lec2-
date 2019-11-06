@@ -1,4 +1,7 @@
 package edu.cgcc.cs260;
+
+import java.util.Arrays;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -39,6 +42,7 @@ public class Main {
 		 * bt.postOrder();
 		 */
 		int[] iArray = new int[] {8,10,14,3,6,7,1,4,13};
+		int[] iArraySorted = new int[] {1,3,4,6,7,8,10,13,14};
 		BinaryTree bt = new BinaryTree();
 //		bt.insert(11);
 //		bt.insert(6);
@@ -75,6 +79,10 @@ public class Main {
 		if(p != null) {
 			p.printPerson();
 		}
+		
+		BinaryTree bt2 = new BinaryTree();
+		bt2.insertSortedArray(iArraySorted);
+		bt2.inOrder();
 	}
 
 }

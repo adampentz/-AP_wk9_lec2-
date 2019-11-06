@@ -131,6 +131,22 @@ public class BinaryTree {
 		return rt;
 	}
 	
+	private BSTNode bulkInsertSortedArray(int[] iArray, int low, int high) {
+		if(low > high)
+			return null;
+		
+		int mid = low + (high - low)/2;
+		BSTNode rt = new BSTNode(iArray[mid]);
+		
+		//left
+		rt.left = bulkInsertSortedArray(iArray, low, mid - 1);
+		
+		//right
+		rt.right = bulkInsertSortedArray(iArray, mid + 1, high);
+		
+		return rt;
+	}
+	
 	/**
 	 * delete a node from the tree
 	 * @param rt
@@ -226,6 +242,14 @@ public class BinaryTree {
      */
 	public void insert(int key) {
 		root = insert(root, key);
+	}
+	
+	/**
+	 * bulk insert a sorted integer array of keys
+	 * @param iArray
+	 */
+	public void insertSortedArray(int[] iArray) {
+		root = bulkInsertSortedArray(iArray, 0, iArray.length - 1);
 	}
 	
 	/**
