@@ -1,12 +1,12 @@
 package edu.cgcc.cs260;
 
-public class BinaryTree {
+public class BinarySearchTree {
 	
 	//members
 	private BSTNode root;
 	
 	//constructor
-	BinaryTree(){
+	BinarySearchTree(){
 	}
 	
 	//private member functions
