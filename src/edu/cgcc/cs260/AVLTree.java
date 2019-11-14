@@ -400,6 +400,6 @@ public class AVLTree {
 	}
 	
 	public void printBalance() {
-		printNodeBalances(root);
+		printNodeBalance(root);
 	}
 }
